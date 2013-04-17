@@ -81,7 +81,7 @@
       ;; when v/x << 1, ln(1 + v/x) = v/x.
       (define criteria 0.01)
       (let1 v/x (/. st av)
-        (if (< v/x criteria)
+        (if (or (< v/x criteria) (> st av)) ; (- av st) must not be minus.
             (values (* -1 R temp (log av)) v/x (- v/x))
             (values (* -1 R temp (log av))
                     (* -1 R temp (log (+ av st)))
