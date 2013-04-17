@@ -1,5 +1,7 @@
 #!/usr/bin/env gosh
 (use srfi-42)
+(use slib)
+(require 'format)
 ;;(use file.util)
 ;;(current-directory)
 ;;(use gauche.process)
@@ -95,7 +97,7 @@
         (jfile (ref lis 2)))
     (receive (v +s -s)
         (calc-fe-change ifile jfile)
-      (format #t "~20s~25s~25s~%" ifile +s -s))
+      (format #t "~20s~3@{~14,9f~}~%" ifile v +s -s))
     0))
 
 (define (main args)
