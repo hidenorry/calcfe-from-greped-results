@@ -83,9 +83,11 @@
       (let1 v/x (/. st av)
         (if (or (< v/x criteria) (> st av)) ; (- av st) must not be minus.
             (values (* -1 R temp (log av)) v/x (- v/x))
-            (values (* -1 R temp (log av))
-                    (* -1 R temp (log (+ av st)))
-                    (* -1 R temp (log (- av st)))))))))
+            (let1 center (* -1 R temp (log av))
+                    (values
+                     center
+                     (- (* -1 R temp (log (- av st))) center)
+                     (- (* -1 R temp (log (+ av st))) center))))))))
 
 (define (calc-fe-change ifile jfile)
   (calc-fe (get-energy ifile) (get-energy jfile)))
